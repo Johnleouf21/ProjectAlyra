@@ -1,1 +1,1 @@
-npx hardhat test
+npx hardhat test --coverage

@@ -32,12 +32,8 @@ jobs:
       - name: Compile contracts
         run: npx hardhat compile --force
 
-      - name: Run tests
-        run: npx hardhat test
-
-      - name: Run coverage
-        run: npx hardhat coverage
-        continue-on-error: true
+      - name: Run tests & coverage
+        run: npx hardhat test --coverage
 
   lint:
     name: Code Quality
