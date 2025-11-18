@@ -39,17 +39,7 @@ jobs:
         run: npx hardhat compile --force
 
       - name: Run tests with coverage
-        run: npx hardhat test --coverage
-
-      - name: Upload coverage reports
-        uses: codecov/codecov-action@v4
-        if: always()
-        with:
-          files: ./backend/coverage/coverage-final.json
-          flags: backend
-          fail_ci_if_error: false
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+        run: npx hardhat test --coverage --gas-stats
 
   backend-lint:
     name: Backend - Code Quality
@@ -77,11 +67,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Compile Solidity contracts (generates TypeScript types)
+        run: npx hardhat compile --force
+
       - name: TypeScript type check
         run: pnpm lint
-
-      - name: Check Solidity contracts compilation
-        run: npx hardhat compile --force
 
   # Frontend Jobs
   frontend-test:
