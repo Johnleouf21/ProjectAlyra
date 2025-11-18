@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity 0.8.28;
+pragma solidity ^0.8.28;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
@@ -87,21 +87,21 @@ contract VotingOptimized is Ownable, ReentrancyGuard {
     /// @notice Get voter information
     /// @param _addr Address of the voter
     /// @return Voter struct with voter information
-    function getVoter(address _addr) external view onlyVoters returns (Voter memory) {
+    function getVoter(address _addr) external view returns (Voter memory) {
         return voters[_addr];
     }
 
     /// @notice Get a specific proposal
     /// @param _id ID of the proposal
     /// @return Proposal struct with proposal information
-    function getOneProposal(uint256 _id) external view onlyVoters returns (Proposal memory) {
+    function getOneProposal(uint256 _id) external view returns (Proposal memory) {
         if(_id >= proposalsArray.length) revert ProposalNotFound();
         return proposalsArray[_id];
     }
 
     /// @notice Get all proposals at once (for frontend efficiency)
     /// @return Array of all proposals
-    function getAllProposals() external view onlyVoters returns (Proposal[] memory) {
+    function getAllProposals() external view returns (Proposal[] memory) {
         return proposalsArray;
     }
 

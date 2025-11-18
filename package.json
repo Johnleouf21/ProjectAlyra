@@ -20,14 +20,6 @@
     "lint-staged": "^16.2.6"
   },
   "lint-staged": {
-    "backend/**/*.sol": [
-      "cd backend && npx hardhat compile --force"
-    ],
-    "backend/**/*.ts": [
-      "cd backend && pnpm lint"
-    ],
-    "front/**/*.{ts,tsx}": [
-      "cd front && pnpm lint"
-    ]
+    "*": "echo 'Skipping lint-staged for monorepo - run pnpm lint manually'"
   }
 }

@@ -46,3 +46,6 @@ out/
 
 # Ignition
 ignition/deployments/
+backend/ignition/deployments/chain-11155111/build-info/solc-0_8_28-fbed63adba9b01ae30a06a75e5d5ced0ef483062.json
+backend/ignition/deployments/chain-11155111/deployed_addresses.json
+backend/ignition/deployments/chain-11155111/journal.jsonl
