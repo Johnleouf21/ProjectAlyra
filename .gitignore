@@ -19,8 +19,6 @@
 # Hardhat coverage reports
 /coverage
 .env
-hardhat.config.ts
-.vscode/settings.json
 ignition/deployments/chain-31337/journal.jsonl
 ignition/deployments/chain-31337/deployed_addresses.json
 ignition/deployments/chain-31337/artifacts/VotingModule#Voting.json

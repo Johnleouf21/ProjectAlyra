@@ -1,5 +1,5 @@
 {
-  "name": "Alyra",
+  "name": "alyra",
   "version": "1.0.0",
   "type": "module",
   "devDependencies": {
@@ -13,11 +13,24 @@
     "chai": "^5.3.3",
     "ethers": "^6.15.0",
     "forge-std": "github:foundry-rs/forge-std#v1.9.4",
-    "hardhat": "^3.0.7",
-    "mocha": "^11.7.4",
+    "hardhat": "^3.0.15",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.6",
+    "mocha": "^11.7.5",
     "typescript": "~5.8.0"
   },
   "dependencies": {
     "@openzeppelin/contracts": "^5.4.0"
+  },
+  "scripts": {
+    "prepare": "husky",
+    "test": "hardhat test",
+    "compile": "hardhat compile --force",
+    "lint": "tsc --noEmit"
+  },
+  "lint-staged": {
+    "*.sol": [
+      "npx hardhat compile --force"
+    ]
   }
 }
