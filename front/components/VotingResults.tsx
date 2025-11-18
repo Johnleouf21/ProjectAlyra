@@ -84,7 +84,7 @@ export function VotingResults() {
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
-            {sortedProposals.map((proposal, index) => {
+            {sortedProposals.map((proposal) => {
               const originalIndex = proposals.findIndex(p => p.description === proposal.description)
               const percentage = totalVotes > 0
                 ? Math.round((Number(proposal.voteCount) / totalVotes) * 100)

@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useReadContract, useWriteContract, useWatchContractEvent, useWaitForTransactionReceipt } from 'wagmi'
 import { VOTING_OPTIMIZED_ABI } from '@/lib/votingOptimizedABI'
 import { toast } from 'sonner'
@@ -19,7 +19,6 @@ interface Voter {
 }
 
 export function useVotingContract(address: string) {
-  const [proposals, setProposals] = useState<Proposal[]>([])
 
   const { writeContract, data: hash, isPending } = useWriteContract()
   const { isLoading: isConfirming, isSuccess } = useWaitForTransactionReceipt({ hash })
@@ -123,14 +122,7 @@ export function useVotingContract(address: string) {
     },
   })
 
-  // Update proposals when data changes
-  useEffect(() => {
-    if (proposalsData) {
-      setProposals(proposalsData as Proposal[])
-    }
-  }, [proposalsData])
-
-  // Show success message
+  // Show success message and refetch data
   useEffect(() => {
     if (isSuccess) {
       toast.success('Transaction confirmed!')
@@ -139,7 +131,7 @@ export function useVotingContract(address: string) {
       refetchProposals()
       refetchWinner()
     }
-  }, [isSuccess])
+  }, [isSuccess, refetchStatus, refetchVoter, refetchProposals, refetchWinner])
 
   // Handle the case where getVoter reverts with NotVoter error
   // If there's an error, it means the user is not registered
@@ -288,7 +280,7 @@ export function useVotingContract(address: string) {
     isVoter,
     hasVoted,
     workflowStatus: workflowStatus as number | undefined,
-    proposals,
+    proposals: (proposalsData as Proposal[]) || [],
     winner: winner as number | undefined,
     isLoading: isPending || isConfirming,
     addVoter,

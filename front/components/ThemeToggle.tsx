@@ -3,16 +3,25 @@
 import { Moon, Sun } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import { Button } from '@/components/ui/button'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
 
-  // useEffect only runs on the client, so now we can safely show the UI
-  useEffect(() => {
+  // Simple client-side check without effect
+  if (typeof window === 'undefined') {
+    return (
+      <Button variant="ghost" size="icon" disabled>
+        <Sun className="h-5 w-5" />
+      </Button>
+    )
+  }
+
+  // On first client render, mark as mounted
+  if (!mounted) {
     setMounted(true)
-  }, [])
+  }
 
   if (!mounted) {
     return (

@@ -158,10 +158,10 @@ describe("VotingOptimized Contract", function () {
       expect(voter.hasVoted).to.be.false;
     });
 
-    it("Should revert with NotVoter when non-voter tries to get voter info", async function () {
-      await expect(
-        voting.connect(nonVoter).getVoter(voter1.address)
-      ).to.be.revertedWithCustomError(voting, "NotVoter");
+    it("Should allow anyone to get voter information (no onlyVoters)", async function () {
+      const voter = await voting.connect(nonVoter).getVoter(voter1.address);
+      expect(voter.isRegistered).to.be.true;
+      expect(voter.hasVoted).to.be.false;
     });
 
     it("Should allow voter to get one proposal", async function () {
@@ -191,10 +191,11 @@ describe("VotingOptimized Contract", function () {
       expect(await voting.getProposalsCount()).to.equal(3);
     });
 
-    it("Should revert getAllProposals when called by non-voter", async function () {
-      await expect(
-        voting.connect(nonVoter).getAllProposals()
-      ).to.be.revertedWithCustomError(voting, "NotVoter");
+    it("Should allow anyone to get all proposals (no onlyVoters)", async function () {
+      await voting.connect(voter2).addProposal("Proposal 2");
+      const proposals = await voting.connect(nonVoter).getAllProposals();
+      expect(proposals.length).to.equal(3); // GENESIS + 2 proposals
+      expect(proposals[0].description).to.equal("GENESIS");
     });
   });
 
@@ -521,8 +522,10 @@ describe("VotingOptimized Contract", function () {
   describe("Gas Optimization Verification", function () {
     it("Should use custom errors instead of strings", async function () {
       // Custom errors use less gas than require strings
+      // Test with addProposal which still has onlyVoters modifier
+      await voting.startProposalsRegistering();
       await expect(
-        voting.connect(nonVoter).getVoter(voter1.address)
+        voting.connect(nonVoter).addProposal("Test")
       ).to.be.revertedWithCustomError(voting, "NotVoter");
     });
 

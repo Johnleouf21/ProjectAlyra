@@ -3,7 +3,6 @@
 import { useAccount } from 'wagmi'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
-import { ConnectButton } from '@/components/ConnectButton'
 import { VotingDashboard } from '@/components/VotingDashboard'
 import { Lock } from 'lucide-react'
 

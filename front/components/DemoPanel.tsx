@@ -180,7 +180,7 @@ export function DemoPanel({ address }: DemoPanelProps) {
       <CardContent className="space-y-4">
         <Alert>
           <AlertDescription className="text-xs">
-            <strong>Info:</strong> Ces boutons sont visibles uniquement pour l'owner et facilitent
+            <strong>Info:</strong> Ces boutons sont visibles uniquement pour l&apos;owner et facilitent
             la création de scénarios de démonstration sans devoir tout faire manuellement.
           </AlertDescription>
         </Alert>

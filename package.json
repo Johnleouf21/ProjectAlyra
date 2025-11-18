@@ -20,6 +20,7 @@
     "lint-staged": "^16.2.6"
   },
   "lint-staged": {
-    "*": "echo 'Skipping lint-staged for monorepo - run pnpm lint manually'"
+    "backend/**/*.{ts,sol}": "bash -c 'cd backend && pnpm lint'",
+    "front/**/*.{ts,tsx,js,jsx}": "bash -c 'cd front && pnpm lint'"
   }
 }

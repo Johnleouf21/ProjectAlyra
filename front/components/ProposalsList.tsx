@@ -4,7 +4,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge'
 import { useVotingContract } from '@/hooks/useVotingContract'
 import { useAccount } from 'wagmi'
-import { useEffect } from 'react'
 
 export function ProposalsList() {
   const { address } = useAccount()
