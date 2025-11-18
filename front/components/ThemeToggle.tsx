@@ -3,26 +3,18 @@
 import { Moon, Sun } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import { Button } from '@/components/ui/button'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export function ThemeToggle() {
-  const { theme, setTheme } = useTheme()
+  const { theme, setTheme, resolvedTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
 
-  // Simple client-side check without effect
-  if (typeof window === 'undefined') {
-    return (
-      <Button variant="ghost" size="icon" disabled>
-        <Sun className="h-5 w-5" />
-      </Button>
-    )
-  }
+  // Only runs on client after hydration
+  useEffect(() => {
+    setMounted(true) // eslint-disable-line react-hooks/set-state-in-effect
+  }, [])
 
-  // On first client render, mark as mounted
-  if (!mounted) {
-    setMounted(true)
-  }
-
+  // During SSR and first render on client, show a neutral button
   if (!mounted) {
     return (
       <Button variant="ghost" size="icon" disabled>
@@ -30,14 +22,17 @@ export function ThemeToggle() {
       </Button>
     )
   }
+
+  // After hydration, show the actual theme toggle
+  const currentTheme = theme === 'system' ? resolvedTheme : theme
 
   return (
     <Button
       variant="ghost"
       size="icon"
-      onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+      onClick={() => setTheme(currentTheme === 'dark' ? 'light' : 'dark')}
     >
-      {theme === 'dark' ? (
+      {currentTheme === 'dark' ? (
         <Sun className="h-5 w-5 transition-all" />
       ) : (
         <Moon className="h-5 w-5 transition-all" />
