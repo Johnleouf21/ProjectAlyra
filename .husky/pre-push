@@ -1,0 +1,10 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+# Run backend tests before push
+echo "🧪 Running backend tests..."
+cd backend && npx hardhat test
+
+# Optionally run frontend tests if they exist
+# echo "🧪 Running frontend tests..."
+# cd ../front && pnpm test

@@ -22,8 +22,6 @@
     "ethers": "^6.15.0",
     "forge-std": "github:foundry-rs/forge-std#v1.9.4",
     "hardhat": "^3.0.15",
-    "husky": "^9.1.7",
-    "lint-staged": "^16.2.6",
     "mocha": "^11.7.5",
     "typescript": "~5.9.3"
   },
@@ -31,14 +29,8 @@
     "@openzeppelin/contracts": "^5.4.0"
   },
   "scripts": {
-    "prepare": "husky",
     "test": "hardhat test",
     "compile": "hardhat compile --force",
     "lint": "tsc --noEmit"
-  },
-  "lint-staged": {
-    "*.sol": [
-      "npx hardhat compile --force"
-    ]
   }
 }

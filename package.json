@@ -1,0 +1,33 @@
+{
+  "name": "alyra-voting-dapp",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Voting DApp - Monorepo with Smart Contracts and Next.js Frontend",
+  "type": "module",
+  "scripts": {
+    "prepare": "husky",
+    "backend:test": "cd backend && pnpm test",
+    "backend:compile": "cd backend && pnpm compile --force",
+    "backend:lint": "cd backend && pnpm lint",
+    "frontend:dev": "cd front && pnpm dev",
+    "frontend:build": "cd front && pnpm build",
+    "frontend:lint": "cd front && pnpm lint",
+    "test": "pnpm backend:test",
+    "lint": "pnpm backend:lint && pnpm frontend:lint"
+  },
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.6"
+  },
+  "lint-staged": {
+    "backend/**/*.sol": [
+      "cd backend && npx hardhat compile --force"
+    ],
+    "backend/**/*.ts": [
+      "cd backend && pnpm lint"
+    ],
+    "front/**/*.{ts,tsx}": [
+      "cd front && pnpm lint"
+    ]
+  }
+}
