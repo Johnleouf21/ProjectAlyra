@@ -1,0 +1,27 @@
+# Node modules
+/node_modules
+
+# Compilation output
+/dist
+
+# pnpm deploy output
+/bundle
+
+# Hardhat Build Artifacts
+/artifacts
+
+# Hardhat compilation (v2) support directory
+/cache
+
+# Typechain output
+/types
+
+# Hardhat coverage reports
+/coverage
+.env
+hardhat.config.ts
+.vscode/settings.json
+ignition/deployments/chain-31337/journal.jsonl
+ignition/deployments/chain-31337/deployed_addresses.json
+ignition/deployments/chain-31337/artifacts/VotingModule#Voting.json
+ignition/deployments/chain-31337/build-info/solc-0_8_28-ee90fa15627e308b42c89e9390980f524249d7b1.json
