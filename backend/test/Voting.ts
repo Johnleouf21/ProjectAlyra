@@ -1,17 +1,17 @@
 import { expect } from "chai";
 import { network } from "hardhat";
-import { Voting } from "../typechain-types";
-import { SignerWithAddress } from "@nomicfoundation/hardhat-ethers/signers";
+import type { Voting } from "../types/ethers-contracts/Voting";
+import type { HardhatEthersSigner } from "@nomicfoundation/hardhat-ethers/types";
 
 const { ethers } = await network.connect();
 
 describe("Voting Contract", function () {
   let voting: Voting;
-  let owner: SignerWithAddress;
-  let voter1: SignerWithAddress;
-  let voter2: SignerWithAddress;
-  let voter3: SignerWithAddress;
-  let nonVoter: SignerWithAddress;
+  let owner: HardhatEthersSigner;
+  let voter1: HardhatEthersSigner;
+  let voter2: HardhatEthersSigner;
+  let voter3: HardhatEthersSigner;
+  let nonVoter: HardhatEthersSigner;
 
   beforeEach(async function () {
     [owner, voter1, voter2, voter3, nonVoter] = await ethers.getSigners();
@@ -19,7 +19,7 @@ describe("Voting Contract", function () {
     // Déployer le contrat avec voter1 pré-enregistré
     voting = await ethers.deployContract("Voting", [voter1.address], {
       value: ethers.parseEther("0.000001")
-    });
+    }) as unknown as Voting;
   });
 
   describe("Deployment", function () {
